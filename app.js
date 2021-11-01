@@ -42,9 +42,27 @@ stop/addEventListener(`click`, () => {
 // BONUS…
 // 4. Using setInterval, display a countdown clock as a p element/tag inside the div with the id of "countdown". Have the countdown clock start at 2 minutes and count down. The countdown clock should display in the following format (Example: 2:00 to start and 0:00 at end). ALSO, when the countdown timer hits zero have it display a message saying… "TIME IS UP" instead of the clock (AKA 0:00).
 
-setTimeout(() => {
-    const div3 = document.querySelector(`#countdown`);
-    const p4 = document.createElement(`p`);
-    p4.innerText = `countdown clock here`
-    div3.append(p4);
-  });
+let startingMinutes = .1;
+let clock= startingMinutes * 60; 
+const p4 = document.createElement(`p`);
+
+const countdownElement = document.getElementById('countdown'); 
+
+setInterval(updateCountdown, 1000); 
+function updateCountdown() {
+  const minutes = Math.floor(clock / 60); 
+  let seconds = clock % 60; 
+
+  seconds = seconds < 10 ? `0` + seconds : seconds; 
+
+  
+  countdownElement.innerHTML = `${minutes}:${seconds}`; 
+
+  if (clock > 0){
+  clock--; 
+  clock = clock < 0 ? 0 : clock; 
+
+  } else {
+    countdownElement.innerHTML = (`TIME IS UP`);
+}
+};
